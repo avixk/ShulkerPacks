@@ -19,14 +19,19 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShulkerListener implements Listener {
 
-    public ShulkerPacks main;
+    public static ShulkerPacks main;
     public ShulkerListener(ShulkerPacks plugin) {
         this.main = plugin; //set it equal to an instance of main
     }
+
+    //cool-down
+    private Map<Player, Long> shulkerOpenCooldown = new HashMap<>();
 
     /*
     Saves the shulker on inventory drag if its open
@@ -210,14 +215,40 @@ public class ShulkerListener implements Listener {
     @EventHandler
     public void onClickAir(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (main.canopeninair && (event.getClickedBlock() == null || event.getClickedBlock().getType() == Material.AIR)) {
-            if ((!main.shiftclicktoopen || player.isSneaking())) {
-                if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-                     if (main.canopeninair && player.hasPermission("shulkerpacks.open_in_air")) {
-                         ItemStack item = event.getItem();
-                         openInventoryIfShulker(item, event.getPlayer());
-                         main.fromhand.put(player, true);
-                     }
+        Action action = event.getAction();
+
+        if (action == Action.RIGHT_CLICK_AIR) {
+            ItemStack item = event.getItem();
+            if (item != null && item.getType() == Material.SHULKER_BOX) {
+                // Cooldown check for opening shulker boxes
+                if (shulkerOpenCooldown.containsKey(player)) {
+                    long lastOpenTime = shulkerOpenCooldown.get(player);
+                    long currentTime = System.currentTimeMillis();
+
+                    if (currentTime - lastOpenTime < main.openinaircooldown) {
+                        player.sendMessage(ChatColor.RED + "You must wait before opening another shulker box!");
+                        Bukkit.getLogger().warning("Player" + player + "is opening shulker boxes very quickly! They might be hacking!");
+                        event.setCancelled(true);
+                        return;
+                    }
+                }
+
+                // Update the last open time for cooldown
+                shulkerOpenCooldown.put(player, System.currentTimeMillis());
+
+                if (main.canopeninair && player.hasPermission("shulkerpacks.open_in_air")) {
+                    // Check if the shulker box is already open
+                    if (checkIfOpen(item)) {
+                        event.setCancelled(true);
+                        return;
+                    }
+                    ItemStack mostRecentlyUsedShulker = ShulkerPacks.openshulkers.get(player);
+                    if (mostRecentlyUsedShulker != null && mostRecentlyUsedShulker.equals(item)){
+                        return;
+                    }
+
+                    openInventoryIfShulker(item, player);
+                    main.fromhand.put(player, true);
                 }
             }
         }

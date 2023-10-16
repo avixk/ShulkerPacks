@@ -15,6 +15,8 @@ canplaceshulker: true         #false will prevent users from placing shulkerboxe
 #true will prevent users from opening shulkerboxes within 7 seconds of being hit by a player
 disable-in-combat: false
 
+openinaircooldown: 500 #this is in miliseconds (500 = half a second)
+
 defaultname: "&9Shulker Pack"
 shiftclicktoopen: false
 shulkervolume: 1              #0.1 is quiet, 1 is loud
