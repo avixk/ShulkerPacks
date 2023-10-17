@@ -79,6 +79,12 @@ public class ShulkerListener implements Listener {
     	
         Player player = (Player) event.getWhoClicked();
 
+        // make sure player isn't holding an item on their cursor when opening a shulker box
+        if (event.getCursor() != null && event.getCursor().getType() != Material.AIR && event.getCurrentItem().getType() == Material.SHULKER_BOX && event.getClick() == ClickType.RIGHT){
+            event.setCancelled(true);
+            return;
+        }
+
         if (ShulkerPacks.openshulkers.containsKey(player)) {
             if (ShulkerPacks.openshulkers.get(player).getType() == Material.AIR) {
                 event.setCancelled(true);
