@@ -142,7 +142,7 @@ public class ShulkerListener implements Listener {
 
             //make it so you cannot open in entity inventories, this is a stupid solution I think, but what can ya do
             InventoryHolder holder = event.getClickedInventory().getHolder();
-            if (holder instanceof Entity){
+            if (holder instanceof Entity && !(holder instanceof Player)){
                 return;
             }
 
