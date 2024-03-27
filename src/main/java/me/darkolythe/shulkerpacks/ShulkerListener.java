@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.ShulkerBox;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +16,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockStateMeta;
 
@@ -80,7 +82,7 @@ public class ShulkerListener implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         // make sure player isn't holding an item on their cursor when opening a shulker box
-        if (event.getCursor() != null && event.getCursor().getType() != Material.AIR && event.getCurrentItem().getType() == Material.SHULKER_BOX && event.getClick() == ClickType.RIGHT){
+        if (event.getCursor() != null && event.getCursor().getType() != Material.AIR && event.getCurrentItem() != null && event.getCurrentItem().getType().toString().contains("SHULKER_BOX") && event.getClick() == ClickType.RIGHT){
             event.setCancelled(true);
             return;
         }
@@ -138,7 +140,15 @@ public class ShulkerListener implements Listener {
                 return;
             }
 
-            if(event.getClickedInventory() != null && event.getClickedInventory().getHolder() != null && event.getClickedInventory().getHolder().getClass().toString().endsWith(".CraftBarrel") && !main.canopeninbarrels) {
+            //make it so you cannot open in entity inventories, this is a stupid solution I think, but what can ya do
+            InventoryHolder holder = event.getClickedInventory().getHolder();
+            if (holder instanceof Entity){
+                return;
+            }
+
+            if(event.getClickedInventory() != null && event.getClickedInventory().getHolder() != null &&
+                    event.getClickedInventory().getHolder().getClass().toString().endsWith(".CraftBarrel") &&
+                    !main.canopeninbarrels) {
             	return;
             }
 
@@ -225,7 +235,7 @@ public class ShulkerListener implements Listener {
 
         if (action == Action.RIGHT_CLICK_AIR) {
             ItemStack item = event.getItem();
-            if (item != null && item.getType() == Material.SHULKER_BOX) {
+            if (item != null && item.getType().toString().contains("SHULKER_BOX")) {
                 // Cooldown check for opening shulker boxes
                 if (shulkerOpenCooldown.containsKey(player)) {
                     long lastOpenTime = shulkerOpenCooldown.get(player);
