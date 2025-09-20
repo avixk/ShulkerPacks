@@ -1,9 +1,6 @@
 package me.darkolythe.shulkerpacks;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.ShulkerBox;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -221,7 +218,7 @@ public class ShulkerListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             Player player = (Player) event.getPlayer();
             if (saveShulker(player, player.getOpenInventory().getTitle())) {
-                player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_CLOSE, main.volume, 1);
+                player.getWorld().playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_CLOSE, SoundCategory.PLAYERS, main.volume, 1);
                 if (main.openpreviousinv) {
                     openPreviousInventory(player);
                 }
@@ -389,7 +386,7 @@ public class ShulkerListener implements Listener {
                                 }
                             }, 1);*/
                             player.openInventory(inv);
-                            player.playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_OPEN, main.volume, 1);
+                            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_SHULKER_BOX_OPEN, SoundCategory.PLAYERS, main.volume, 1);
                             ShulkerPacks.openshulkers.put(player, item);
                             main.openinventories.put(player, player.getOpenInventory().getTopInventory());
                             return true;
