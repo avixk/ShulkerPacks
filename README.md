@@ -1,5 +1,5 @@
 # ShulkerPacks
-open shulker boxes without placing them down
+open shulker boxes without placing them down, now with less dupe glitches!
 
 ![Image of Title](https://i.imgur.com/m1Y8zsr.png)
 
