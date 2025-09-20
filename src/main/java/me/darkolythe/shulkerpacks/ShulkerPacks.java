@@ -30,7 +30,7 @@ public final class ShulkerPacks extends JavaPlugin {
     boolean shiftclicktoopen = false;
     boolean canopeninenderchest, canopeninbarrels, canplaceshulker, canopenininventory, canopeninair;
 
-    int openinaircooldown;
+    int shulker_open_cooldown;
     float volume;
 
     /*

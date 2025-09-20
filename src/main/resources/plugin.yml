@@ -2,7 +2,7 @@ name: ShulkerPacks
 version: 1.7.0
 main: me.darkolythe.shulkerpacks.ShulkerPacks
 api-version: 1.16
-authors: [christopherwalker,Kerm,avixk]
+authors: [Darkolythe,Kerm,avixk]
 
 commands:
   shulkerpacks:

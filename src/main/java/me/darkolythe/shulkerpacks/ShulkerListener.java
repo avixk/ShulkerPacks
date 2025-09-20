@@ -349,7 +349,7 @@ public class ShulkerListener implements Listener {
             long lastOpenTime = shulkerOpenCooldown.get(player);
             long currentTime = System.currentTimeMillis();
 
-            if (currentTime - lastOpenTime < main.openinaircooldown) {
+            if (currentTime - lastOpenTime < main.shulker_open_cooldown) {
                 Bukkit.getLogger().warning(player.getName() + " is opening shulker boxes very quickly! They might be hacking!");
                 Bukkit.broadcast(player.getName() + " is opening shulker boxes very quickly! They might be hacking!","shulkerpacks.admin");
 

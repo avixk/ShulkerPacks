@@ -20,7 +20,7 @@ public class ConfigHandler {
         main.openpreviousinv = config.getBoolean("open-previous-inventory", false);
         main.volume = (float) config.getDouble("shulkervolume", 1.0);
         main.pvp_timer_enabled = config.getBoolean("disable-in-combat", true);
-        main.openinaircooldown = config.getInt("openinaircooldown", 500);
+        main.shulker_open_cooldown = config.getInt("shulker_open_cooldown", 500);
         if (config.getString("defaultname") != null) {
             main.defaultname = ChatColor.translateAlternateColorCodes('&', config.getString("defaultname"));
         }
