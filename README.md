@@ -13,7 +13,12 @@ shulkerpacks.use (lets the player use shulker packs)
 
 ### Config:
 ```
-blacklistedinventories: ["&4&lMineXChange", "test inventory"]
+# BLACKLIST AUCTION INVENTORIES HERE
+# blacklist works as follows:
+# if you include the word "a" in the blacklist, every inventory with the letter "a" will be blocked.
+# because of this, try to be as precise as possible.
+# If your inventory contains extra characters, such as "Auction Page 8", simply blacklisting "Auction Page" will block every page
+blacklistedinventories: ["&4&lMineXChange", "test inventory","Crafter"," Contents","Auction","Preview","DeathSign"," Item", "&cTrade with","Editing"]
 
 canopeninair: true            #false will prevent users from opening shulkerboxes by clicking the air
 canopenininventory: true      #false will prevent users from opening shulkerboxes in their inventory
@@ -22,14 +27,21 @@ canopeninenderchest: true     #false will prevent users from opening shulkerboxe
 canopeninbarrels: true        #false will prevent users from opening shulkerboxes in barrels
 canplaceshulker: true         #false will prevent users from placing shulkerboxes by accident
 
+# true will prevent users from opening shulkerboxes within 7 seconds of being hit by a player
+disable-in-combat: false
+
+# cooldown for opening shulkers in milliseconds
+shulker-open-cooldown: 100
+
 defaultname: "&9Shulker Pack"
-shiftclicktoopen: false
+shiftclicktoopen: false # applies to both ingame and in inventory
 shulkervolume: 1              #0.1 is quiet, 1 is loud
-#shift click to open applies to both ingame and in inventory
+
+
+# go to previous menu instead of just closing the shulker
+open-previous-inventory: false
 
 ```
-__The fastest and easiest way to contact me:__
-Discord: https://discord.gg/AET9mWj
 
 ![Image of Boost](https://i.imgur.com/8OAtOy5.png)
 
