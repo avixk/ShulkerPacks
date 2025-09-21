@@ -144,7 +144,7 @@ public class ShulkerListener implements Listener {
             // prevent the player from opening the shulkerbox in inventories without storage slots
             String typeStr = event.getClickedInventory().getType().toString();
             InventoryType type = event.getClickedInventory().getType();
-            if (typeStr.equals("WORKBENCH") || typeStr.equals("ANVIL") || typeStr.equals("BEACON") || typeStr.equals("MERCHANT") || typeStr.equals("ENCHANTING") ||
+            if (typeStr.equals("WORKBENCH") || typeStr.equals("ANVIL") || typeStr.equals("CRAFTER") || typeStr.equals("BEACON") || typeStr.equals("MERCHANT") || typeStr.equals("ENCHANTING") ||
                     typeStr.equals("GRINDSTONE") || typeStr.equals("CARTOGRAPHY") || typeStr.equals("LOOM") || typeStr.equals("STONECUTTER")) {
                 return;
             }

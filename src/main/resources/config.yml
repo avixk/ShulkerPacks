@@ -3,7 +3,7 @@
 # if you include the word "a" in the blacklist, every inventory with the letter "a" will be blocked.
 # because of this, try to be as precise as possible.
 # If your inventory contains extra characters, such as "Auction Page 8", simply blacklisting "Auction Page" will block every page
-blacklistedinventories: ["&4&lMineXChange", "test inventory","Crafter"," Contents","Auction","Preview","DeathSign"," Item", "&cTrade with","Editing","Grave"]
+blacklistedinventories: ["&4&lMineXChange", "test inventory"," Contents","Auction","Preview","DeathSign"," Item", "&cTrade with","Editing","Grave"]
 
 canopeninair: true            #false will prevent users from opening shulkerboxes by clicking the air
 canopenininventory: true      #false will prevent users from opening shulkerboxes in their inventory
