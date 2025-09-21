@@ -7,6 +7,7 @@ blacklistedinventories: ["&4&lMineXChange", "test inventory","Crafter"," Content
 
 canopeninair: true            #false will prevent users from opening shulkerboxes by clicking the air
 canopenininventory: true      #false will prevent users from opening shulkerboxes in their inventory
+canopeninvirtualinventory: true #false will prevent users from opening shulkerboxes in virtual inventories
 canopeninchests: true         #false will prevent users from opening shulkerboxes in chests
 canopeninenderchest: true     #false will prevent users from opening shulkerboxes in enderchests
 canopeninbarrels: true        #false will prevent users from opening shulkerboxes in barrels

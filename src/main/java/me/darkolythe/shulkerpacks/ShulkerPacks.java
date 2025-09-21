@@ -28,7 +28,7 @@ public final class ShulkerPacks extends JavaPlugin {
     String defaultname = ChatColor.BLUE + "Shulker Pack";
     boolean pvp_timer_enabled = false;
     boolean shiftclicktoopen = false;
-    boolean canopeninenderchest, canopeninbarrels, canplaceshulker, canopenininventory, canopeninair;
+    boolean canopeninenderchest, canopeninbarrels, canplaceshulker, canopenininventory, canopeninvirtualinventory, canopeninair;
 
     int shulker_open_cooldown;
     float volume;

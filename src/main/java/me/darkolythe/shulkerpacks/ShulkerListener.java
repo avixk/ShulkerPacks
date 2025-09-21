@@ -94,6 +94,22 @@ public class ShulkerListener implements Listener {
     	
         Player player = (Player) event.getWhoClicked();
 
+        if (ShulkerPacks.openshulkers.containsKey(player)) {
+            if (ShulkerPacks.openshulkers.get(player).getType() == Material.AIR) {
+                event.setCancelled(true);
+                player.closeInventory();
+                return;
+            }
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (!saveShulker(player, event.getView().getTitle())) {
+                                        event.setCancelled(true);
+                                    }
+                                }
+                            }, 0); //our enderchest plugin fails to save correctly if the shulker isn't saved every inventory interact
+        }
+
         if(event.getCurrentItem() == null || !event.getCurrentItem().getType().toString().contains("SHULKER_BOX")){
             return;
         }
@@ -104,13 +120,6 @@ public class ShulkerListener implements Listener {
             return;
         }
 
-        if (ShulkerPacks.openshulkers.containsKey(player)) {
-            if (ShulkerPacks.openshulkers.get(player).getType() == Material.AIR) {
-                event.setCancelled(true);
-                player.closeInventory();
-                return;
-            }
-        }
 
         if (checkIfOpen(event.getCurrentItem())) { //cancels the event if the player is trying to remove an open shulker
             if (event.getClick() != ClickType.RIGHT) {
@@ -148,7 +157,14 @@ public class ShulkerListener implements Listener {
             // prevent the player from opening it in the inventory if they have no permission
             if ((player.getInventory() == event.getClickedInventory())) {
                 if (!main.canopenininventory || !player.hasPermission("shulkerpacks.open_in_inventory")) {
-            	    return;
+                    return;
+                }
+            }
+
+            // prevent the player from opening it in virtual inventories if they have no permission
+            if ((event.getClickedInventory().getHolder() == null && event.getClickedInventory().getLocation() == null)) {
+                if (!main.canopeninvirtualinventory || !player.hasPermission("shulkerpacks.open_in_virtual_inventory")) {
+                    return;
                 }
             }
 
@@ -188,14 +204,6 @@ public class ShulkerListener implements Listener {
                 }
                 event.setCancelled(isCancelled);
             }
-            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(main, new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (!saveShulker(player, event.getView().getTitle())) {
-                                        event.setCancelled(true);
-                                    }
-                                }
-                            }, 1);
 
         }
     }

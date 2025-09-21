@@ -14,6 +14,7 @@ public class ConfigHandler {
         main.canopeninenderchest = config.getBoolean("canopeninenderchest", true);
         main.canopeninbarrels = config.getBoolean("canopeninbarrels", true);
         main.canopenininventory = config.getBoolean("canopenininventory", true);
+        main.canopeninvirtualinventory = config.getBoolean("canopeninvirtualinventory", true);
         main.canplaceshulker = config.getBoolean("canplaceshulker", true);
         main.blacklist = config.getStringList("blacklistedinventories");
         main.canopeninair = config.getBoolean("canopeninair", true);
