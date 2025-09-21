@@ -160,6 +160,7 @@ public class ShulkerListener implements Listener {
                     return;
                 }
             }
+            if(event.getSlot() == 8 && event.getRawSlot() == 45)return; // patches a very odd crafter dupe. For some reason the result slot returns as a player slot
 
             // prevent the player from opening it in virtual inventories if they have no permission
             if ((event.getClickedInventory().getHolder() == null && event.getClickedInventory().getLocation() == null)) {
@@ -232,6 +233,12 @@ public class ShulkerListener implements Listener {
                 }
             }
             ShulkerPacks.openshulkers.remove(player);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(ShulkerPacks.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    ((Player) event.getPlayer()).updateInventory();
+                }
+            },1);
         }
     }
 
